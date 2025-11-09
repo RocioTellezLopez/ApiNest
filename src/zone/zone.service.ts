@@ -4,6 +4,7 @@ import { UpdateZoneDto } from './dto/update-zone.dto';
 import { Zone } from './entities/zone.entity';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { UpdateZoneInput } from './dto/update-zone.input';
 
 
 const MESSAGE_ERROR = {
@@ -48,11 +49,10 @@ export class ZoneService {
     return zone;
   }
 
-  async update(id: string, updateZoneDto: UpdateZoneDto) {
+  async update(id: string, updateZone: UpdateZoneDto | UpdateZoneInput) {
 
-    
     const zone = await this.zoneModel
-      .findByIdAndUpdate(id, updateZoneDto, { new: true })
+      .findByIdAndUpdate(id, updateZone, { new: true })
       .exec();
 
     if (!zone) {
