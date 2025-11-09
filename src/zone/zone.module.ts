@@ -3,6 +3,7 @@ import { ZoneService } from './zone.service';
 import { ZoneController } from './zone.controller';
 import { Zone, ZoneSchema } from './entities/zone.entity';
 import { MongooseModule } from '@nestjs/mongoose';
+import { ZoneResolver } from './zone.resolver';
 
 @Module({
   imports: [
@@ -11,7 +12,7 @@ import { MongooseModule } from '@nestjs/mongoose';
     ]),
   ],
   controllers: [ZoneController],
-  providers: [ZoneService],
+  providers: [ZoneService, ZoneResolver],
   exports: [ZoneService],
 })
 export class ZoneModule {}

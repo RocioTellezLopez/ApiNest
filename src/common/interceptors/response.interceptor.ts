@@ -16,6 +16,12 @@ export class ResponseInterceptor<T> implements NestInterceptor<T> {
   constructor(private readonly reflector: Reflector) {}
 
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
+    const contextType = context.getType<string>();
+
+    if (contextType === 'graphql') {
+      return next.handle();
+    }
+
     const httpCtx = context.switchToHttp();
     const response = httpCtx.getResponse();
     const handler = context.getHandler();

@@ -12,6 +12,9 @@ import { CommonModule } from './common/common.module';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { ResponseInterceptor } from './common/interceptors/response.interceptor';
 import { ZoneModule } from './zone/zone.module';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { join } from 'path';
 
 
 @Module({
@@ -22,6 +25,11 @@ import { ZoneModule } from './zone/zone.module';
     }),
     MongooseModule.forRoot(EnvConfiguration().mongodb, {
       dbName: EnvConfiguration().dbname,
+    }),
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      playground: true,
     }),
     UserModule,
     ClientFinalModule,

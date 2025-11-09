@@ -1,0 +1,36 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Zone {
+  _id: ID
+  zoneName: ZoneMapType!
+}
+
+"""Zona permitida"""
+enum ZoneMapType {
+  NORTE
+  SUR
+  ESTE
+  OESTE
+}
+
+type Query {
+  zones: [Zone!]!
+  zone(id: String!): Zone!
+}
+
+type Mutation {
+  createZone(createZoneInput: CreateZoneInput!): Zone!
+  updateZone(updateZoneInput: UpdateZoneInput!): Zone!
+  removeZone(id: String!): Zone!
+}
+
+input CreateZoneInput {
+  zoneName: ZoneMapType!
+}
+
+input UpdateZoneInput {
+  zoneName: ZoneMapType
+  id: String!
+}

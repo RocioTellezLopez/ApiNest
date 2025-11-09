@@ -27,8 +27,6 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @ApiTags('Zone')
 @Controller('zone')
-@UseGuards(JwtAuthGuard)
-@ApiBearerAuth('access-token')
 export class ZoneController {
   constructor(private readonly zoneService: ZoneService) {}
 
@@ -56,6 +54,8 @@ export class ZoneController {
       },
     },
   })
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth('access-token')
   async create(@Body() createZoneDto: CreateZoneDto) {
     return this.zoneService.create(createZoneDto);
   }
@@ -119,6 +119,8 @@ export class ZoneController {
 
   @Patch(':id')
   @ApiOperation({ summary: 'Actualizar una zona' })
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth('access-token')
   @ApiParam({
     name: 'id',
     description: 'ID de MongoDB',
@@ -148,6 +150,8 @@ export class ZoneController {
 
   @Delete(':id')
   @ApiOperation({ summary: 'Eliminar una zona' })
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth('access-token')
   @ApiParam({
     name: 'id',
     description: 'ID de MongoDB',

@@ -2,19 +2,26 @@ import {
   Catch,
   ExceptionFilter,
   ArgumentsHost,
-  HttpException,
   HttpStatus,
 } from '@nestjs/common';
 import { MongoErrorMapper } from '../mappers/mongo-error.mapper';
+import { GqlArgumentsHost } from '@nestjs/graphql';
 
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
   catch(exception: unknown, host: ArgumentsHost) {
+    const contextType = host.getType<'graphql'>();
+
+    if (contextType === 'graphql') {
+      const gqlHost = GqlArgumentsHost.create(host);
+      console.error('GraphQL Error:', exception);
+      throw exception;
+    }
+
     const ctx = host.switchToHttp();
     const response = ctx.getResponse();
     const request = ctx.getRequest();
 
-    // Mapea errores de Mongo a HttpException si aplica
     const mapped =
       exception instanceof Error
         ? MongoErrorMapper.toHttp(exception)
