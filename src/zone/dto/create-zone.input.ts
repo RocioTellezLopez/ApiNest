@@ -14,8 +14,13 @@ export class CreateZoneInput {
   @IsEnum(ZoneMapType)
   zoneName: ZoneMapType;
 
-  @Field(() =>String)
+  @Field(() => String)
   @IsNotEmpty()
   @IsString()
   description: string;
+
+  @Field(() => String)
+  @IsNotEmpty()
+  @IsString()
+  zoneCode: string;
 }

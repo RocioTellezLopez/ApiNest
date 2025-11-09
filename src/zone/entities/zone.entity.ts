@@ -5,9 +5,8 @@ import { Field, ID, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 @Schema({ timestamps: true })
-export class Zone{
-
-  @Field(() => ID, {nullable: true})
+export class Zone {
+  @Field(() => ID, { nullable: true })
   _id: string;
 
   @ApiProperty({
@@ -26,14 +25,19 @@ export class Zone{
   })
   zoneName: ZoneMapType;
 
-
-  @Field(() => String, {nullable: true})
+  @Field(() => String, { nullable: true })
   @Prop({
     type: String,
     required: true,
   })
   description: string;
 
+  @Field(()=> String, {nullable: true})
+  @Prop({
+    type: String,
+    required: true,
+  })
+  zoneCode: string;
 }
 
 export const ZoneSchema = SchemaFactory.createForClass(Zone);
