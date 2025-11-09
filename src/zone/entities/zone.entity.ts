@@ -25,7 +25,15 @@ export class Zone{
     index: true,
   })
   zoneName: ZoneMapType;
-  
+
+
+  @Field(() => String, {nullable: true})
+  @Prop({
+    type: String,
+    required: true,
+  })
+  description: string;
+
 }
 
 export const ZoneSchema = SchemaFactory.createForClass(Zone);

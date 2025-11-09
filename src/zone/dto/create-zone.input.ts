@@ -1,5 +1,5 @@
 import { Field, InputType, registerEnumType } from '@nestjs/graphql';
-import { IsEnum, IsNotEmpty } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsString } from 'class-validator';
 import { ZoneMapType } from '../../common/enums/zoneMap.enum';
 
 registerEnumType(ZoneMapType, {
@@ -13,4 +13,9 @@ export class CreateZoneInput {
   @IsNotEmpty()
   @IsEnum(ZoneMapType)
   zoneName: ZoneMapType;
+
+  @Field(() =>String)
+  @IsNotEmpty()
+  @IsString()
+  description: string;
 }

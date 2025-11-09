@@ -5,6 +5,7 @@
 type Zone {
   _id: ID
   zoneName: ZoneMapType!
+  description: String
 }
 
 """Zona permitida"""
@@ -28,9 +29,11 @@ type Mutation {
 
 input CreateZoneInput {
   zoneName: ZoneMapType!
+  description: String!
 }
 
 input UpdateZoneInput {
   zoneName: ZoneMapType
+  description: String
   id: String!
 }
